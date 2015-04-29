@@ -1,0 +1,46 @@
+<% unless ["by_day","by_category","by_tag"].include?(params[:action]) %>
+	<div id="all-events-top">
+		<br/>
+		<%= render "shared/timeline" %>
+	</div>
+<% end %>
+
+<div>
+	<%= image_tag("connector_top.jpg") %>
+</div>
+
+<div id="page">
+
+	<% if params[:action] == "by_day" %>
+		<h2>Events for <%= @date.strftime("%B %d, %Y")%></h2>
+	<% elsif params[:action] == "by_category" %>
+		<h2><%= @category.name %> Events</h2>
+		<% 
+		  case @category.id
+		  	 when 2 # 'Dance' %>
+			<script>document.write('<s'+'cript language="JavaScript" src="http://view.atdmt.com/jaction/PFA_20130205_Pifa_DanceEventsPage"></s'+'cript>')</script><noscript><iframe src="http://view.atdmt.com/iaction/PFA_20130205_Pifa_DanceEventsPage" width="1" height="1" frameborder="0" scrolling="No" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0"></iframe></noscript>
+		  <% when 1 # 'Music' %>
+			<script>document.write('<s'+'cript language="JavaScript" src="http://view.atdmt.com/jaction/PFA_20130205_Pifa_MusicEventsPage"></s'+'cript>')</script><noscript><iframe src="http://view.atdmt.com/iaction/PFA_20130205_Pifa_MusicEventsPage" width="1" height="1" frameborder="0" scrolling="No" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0"></iframe></noscript>
+		  <% when 5 # 'Family' %>
+			<script>document.write('<s'+'cript language="JavaScript" src="http://view.atdmt.com/jaction/PFA_20130205_Pifa_FamilyEventsPage"></s'+'cript>')</script><noscript><iframe src="http://view.atdmt.com/iaction/PFA_20130205_Pifa_FamilyEventsPage" width="1" height="1" frameborder="0" scrolling="No" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0"></iframe></noscript>
+		  <% when 6 # 'Free' %>
+			<script>document.write('<s'+'cript language="JavaScript" src="http://view.atdmt.com/jaction/PFA_20130205_Pifa_FreeEventsPage"></s'+'cript>')</script><noscript><iframe src="http://view.atdmt.com/iaction/PFA_20130205_Pifa_FreeEventsPage" width="1" height="1" frameborder="0" scrolling="No" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0"></iframe></noscript>
+		  <% when 3 # 'Theater' %>
+			<script>document.write('<s'+'cript language="JavaScript" src="http://view.atdmt.com/jaction/PFA_20130205_Pifa_TheaterEventsPage"></s'+'cript>')</script><noscript><iframe src="http://view.atdmt.com/iaction/PFA_20130205_Pifa_TheaterEventsPage" width="1" height="1" frameborder="0" scrolling="No" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0"></iframe></noscript>
+		  <% when 4 # 'Exhibitions-Lectures' %>
+			<script>document.write('<s'+'cript language="JavaScript" src="http://view.atdmt.com/jaction/PFA_20130205_Pifa_ExhibitionsLecturesEventsPage"></s'+'cript>')</script><noscript><iframe src="http://view.atdmt.com/iaction/PFA_20130205_Pifa_ExhibitionsLecturesEventsPage" width="1" height="1" frameborder="0" scrolling="No" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0"></iframe></noscript>
+		<% end %>
+	<% elsif params[:action] == "by_tag" %>
+		<h2>Events Tagged "<%= @tag.name %>"</h2>
+	<% else %>
+		<h2>All Events</h2>
+		<script>document.write('<s'+'cript language="JavaScript" src="http://view.atdmt.com/jaction/PFA_20130205_Pifa_AllEventsPage"></s'+'cript>')</script><noscript><iframe src="http://view.atdmt.com/iaction/PFA_20130205_Pifa_AllEventsPage" width="1" height="1" frameborder="0" scrolling="No" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0"></iframe></noscript>
+	<% end %>
+	
+	<%= render :partial => "shared/event", :collection => @events %>
+	
+</div>
+			
+<div id="connector_bottom">
+	<%= image_tag("connector_bottom.jpg") %>
+</div>

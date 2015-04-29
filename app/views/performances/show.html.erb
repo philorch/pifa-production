@@ -1,0 +1,69 @@
+<h2><%= @performance.performance_date.strftime("%B %d") + " - " + @performance.event.name %></h2>
+
+<p>
+  <%= link_to "Edit", edit_performance_path(@performance) %> |
+  <%= link_to "Destroy", @performance, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", performances_path %>
+</p>
+
+<% if flash[:notice] %><div class="notice"><p><%= flash[:notice] %></p></div><% end %>
+<% if flash[:error] %><div class="error"><p><%= flash[:error] %></p></div><% end %>
+
+<div class="container">
+	<div class="column left">
+
+		<div class="group">
+			<h3>Event</h3>
+			<p>
+			  <%= @performance.event.name %>
+			</p>
+		</div>
+
+		<div class="group">
+			<h3>General Information</h3>
+			<p>
+				<strong>Date</strong><br/>
+				<%= @performance.performance_date? ? @performance.performance_date.strftime("%B %d, %Y") : "&nbsp;".html_safe %>
+			</p>
+			<p>
+				<strong>Price Range</strong><br/>
+				<%= @performance.price_range? ? @performance.price_range : "&nbsp;".html_safe %>
+			</p>
+			<p>
+				<strong>Active Buy URL</strong><br/>
+				<%= @performance.active_ticket_url %>
+			</p>
+		</div>
+	</div>
+
+	<div class="column right">
+		<div class="group">
+			<h3>Publish Options</h3>
+			<p>
+				<strong>Status:</strong>
+				<% if @performance.publish? %>
+						<span class="green">Published</span>
+				<% else %>
+					<span class="red">Hidden</span>
+				<% end %>
+			</p>
+		</div>
+
+		<div class="group">
+			<h3>Location</h3>
+			<p><em>Note: Location info here will take priority over default Event location</em></p>
+			<p>
+				<strong>Name</strong><br/>
+				<%= @performance.location? ? @performance.location : "&nbsp;".html_safe %>
+			</p>
+			<p>
+				<strong>Street Address</strong><br/>
+				<%= @performance.address? ? @performance.address : "&nbsp;".html_safe %>
+			</p>
+			<p>
+				<strong>Zip Code</strong><br/>
+				<%= @performance.zip? ? @performance.zip : "&nbsp;".html_safe %>
+			</p>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,44 @@
+<h2>Events</h2>
+
+<p>Content in this CMS will take priority over Tessitura content.</p>
+
+<p>
+	<%= link_to "Add New Event", admin_new_event_path %>
+</p>
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Performer</th>
+		<th>Location</th>
+		<th>Description</th>
+		<th>Day in History</th>
+		<th>Historic Event</th>
+		<th>Status</th>
+		<th>Last Updated</th>
+		<th>ID</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @events.each do |event| %>
+		<tr class="<%= cycle('odd', 'even')%>">
+			<td><%= event.name %></td>
+			<td><%= event.performer %></td>
+			<td><%= event.performances.first.location if event.performances.first.present? %></td>
+			<td><% if event.description? %><%= strip_tags(truncate(event.description, :length => 50)) %><% end %></td>
+			<td><% if event.historic_date? %><%= event.historic_date.strftime("%b-%d-%Y") %><% end %></td>
+			<td><% if event.historic_description? %><%= strip_tags(truncate(event.historic_description, :length => 50)) %><% end %></td>
+			<td>
+				<% if event.publish? %>
+					<span class="green">Published</span>
+				<% else %>
+					<span class="red">Hidden</span>
+				<% end %>
+			</td>
+			<td><%= event.updated_at %></td>
+			<td><%= event.id %></td>
+			<td><%= link_to "view", admin_show_event_path(event.id) %></td>
+			<td><%= link_to "edit", admin_edit_event_path(event.id) %></td>
+		</tr>
+	<% end %>
+</table>

@@ -1,0 +1,29 @@
+body {
+	font-weight: normal;
+}
+
+ul#nav li {
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+div#home {
+	overflow:hidden;
+}
+
+div.photo-caption, p.photo-caption {
+	background-color: #000;
+}
+
+div#events-popup div.date-row div.month,
+div#events-popup div.date-row div.month#march {
+	overflow: hidden;
+	padding-top: 0;
+	height: 38px;
+}
+
+div#events-popup div.date-row div.month div.month-name,
+div#events-popup div.date-row div.month#march div.month-name  {
+	display: inline-block;
+	width: 38px;
+}

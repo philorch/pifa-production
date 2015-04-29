@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  similar_id: 1
+  event_id: 1
+
+two:
+  similar_id: 1
+  event_id: 1

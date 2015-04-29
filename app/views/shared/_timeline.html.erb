@@ -1,0 +1,39 @@
+<div id="timeline-container">
+  <div id="timeline-border" /></div>
+
+<div id="timeline-slider">
+		<div id="sliding-container">
+			
+			<% @events_by_history.order("historic_date").each do |event| %>
+				<div class="slider-event">
+					<%= image_tag event.image_url(:timeline) if event.image.present? %>
+					<div class="wash" onclick="window.location = '<%= event_path(event) %>'">
+						<div class="event-tags">
+							<% for category in event.categories %>
+									<span class="<%= category.class_name %> bevel"><%= category.name.html_safe %></span>
+							<% end %>
+						</div>
+						<div class="historic">
+							<p class="historic-date"><%= event.historic_date_str %></p>
+							<p><%= event.historic_description.present? ? event.historic_description : "PIFA Event" %></p>
+						</div>
+						<div class="info">
+							<h3><%= event.name %></h3>
+							<p class="tix-info">
+								<% if event.ticket_override? %>
+									<%= link_to "Information".html_safe, event_path(event)%>
+								<% else %>
+									<%=link_to "Tickets &amp; Info".html_safe, event_path(event)%>
+								<% end %>
+							</p>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		</div>
+		
+		<img src="/assets/timeline-slideBar.png" id="slide-bar" />
+		<img src="/assets/golden_arrow.png" id="red-slider" />
+	</div>
+
+</div>

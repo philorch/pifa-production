@@ -1,0 +1,30 @@
+<h2>Stories</h2>
+
+<p>This content is viewable on the home page slideshow.</p>
+
+<p>
+	<%= link_to "Add New Story", new_story_path %>
+</p>
+
+<table>
+	<tr>
+		<th>Title</th>
+		<th>Body</th>
+		<th>External Link</th>
+		<th>Last Updated</th>
+		<th>ID</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @stories.each do |story| %>
+		<tr class="<%= cycle('odd', 'even')%>">
+			<td><%= story.title %></td>
+			<td><% if story.body? %><%= strip_tags(truncate(story.body, :length => 50)) %><% end %></td>
+			<td><% if story.url_link? %> http://<%= story.url_link %> <% end %></td>
+			<td><%= story.updated_at %></td>
+			<td><%= story.id %></td>
+			<td><%= link_to "view", story_path(story.id) %></td>
+			<td><%= link_to "edit", edit_story_path(story.id) %></td>
+		</tr>
+	<% end %>
+</table>

@@ -1,0 +1,168 @@
+
+<div class="column left">
+	<fieldset>
+		<h3>General Information</h3>
+		<p>
+			<%= f.label :name %><br />
+			<%= f.text_field :name %>
+		</p>
+		<p>
+			<%= f.label :performer %><br />
+			<%= f.text_field :performer %>
+		</p>
+		<p>
+			<%= f.label :description %><br />
+			<%= f.text_area :description %>
+		</p>
+		<p>
+			<%= f.label :artistic_credit %><br />
+			<%= f.text_area :artistic_credit %>
+		</p>
+		<p>
+			<%= f.label :web_address, "Web Address (eg. http://example.com)" %><br />
+			<%= f.text_field :web_address %>
+		</p>
+	</fieldset>
+
+	<fieldset>
+		<h3>Time in History</h3>
+
+		<p>
+			
+			<%= f.label :historic_format, "Date (eg. 7/20/1969)" %><br />
+			<%= f.text_field :historic_format %>
+		</p>
+		
+		<p>
+			<%= f.label :historic_year, "Year (eg. 1969)" %><br />
+			<%= f.text_field :historic_year %>
+			<p><em>Note: For dates before 0 CE, use a negative number (eg. -352 for 352 BCE)</em></p>
+		</p>
+		
+		<p>
+			<%= f.label :date_text_override, "Date Text Override (eg. \"3B BC.\")" %><br />
+			<%= f.text_field :date_text_override %>
+			<p><em>Note: If entered, this will override the default date display.</em></p>
+		</p>
+
+		<p>
+			<%= f.label :historic_description, "Short Desciption" %><br />
+			<%= f.text_field :historic_description %>
+		</p>
+	</fieldset>
+
+	<fieldset>
+		<h3>Location</h3>
+		<p><em>Note: Any location fields set in a Performance may override this location information.</em></p>
+		<p>
+			<%= f.label :location, "Name" %><br />
+			<%= f.text_field :location %>
+		</p>
+		<p>
+			<%= f.label :address, "Street Address" %><br />
+			<%= f.text_field :address %>
+		</p>
+		<p>
+			<%= f.label :zip, "Zip Code" %><br />
+			<%= f.text_field :zip %>
+		</p>
+	</fieldset>
+
+	<fieldset>
+		<h3>Price Override</h3>
+		<p><em>By default, the price of the first performance (pulled from Tessitura) is displayed as the price of the event. Use this to override the price displayed on the event's page.</em></p>
+		<p>
+			<%= f.label :price_range_override, "Price Range Override" %><br />
+			<%= f.text_field :price_range_override %>
+		</p>
+	</fieldset>
+
+	<fieldset>
+		<h3>Ticketing Override</h3>
+		<p><em>This will replace Ticket info on the Event page. Setting this will also replace the "Times &amp; Tickets" button on index and search pages with an "Information" button</em></p>
+		<p>
+			<%= f.label :ticket_override, "Text" %><br />
+			<%= f.text_area :ticket_override %>
+		</p>	
+		<p>
+			<%= f.check_box :show_default_purchase_button %><%= f.label :show_default_purchase_button, "Show default purchase button with override" %><br />
+		</p>
+	</fieldset>
+	
+</div>
+
+<div class="column right">
+	<fieldset>
+		<h3>Publish Options</h3>
+		<p><em>Note: Even when set to publish, an Event will not show if it has no Performances linked to it.</em></p>
+		<p>
+			<%= f.check_box :publish %> <%= f.label :publish, "Publish" %>
+		</p>
+	</fieldset>
+	
+	<fieldset>
+		<h3>Upload Images</h3>
+		<p>
+			<%= f.label :image, "Historic Image (Primary)" %><br/>
+			<%= image_tag(@event.image_url, :width => 200) if @event.image?%>
+			<%= f.file_field :image %>
+			<%= f.hidden_field :image_cache %>
+		</p>
+		<p>
+			<%= f.label :image2, "Performer Image (Secondary)" %><br/>
+			<%= image_tag(@event.image2_url, :width => 200) if @event.image2?%>
+			<%= f.file_field :image2 %>
+			<%= f.hidden_field :image2_cache %>
+		</p>
+		<p>
+			<%= f.label :credit_image, "Artistic Credit Image" %><br/>
+			<%= image_tag(@event.credit_image_url, :width => 150) if @event.credit_image?%>
+			<%= f.file_field :credit_image %>
+			<%= f.hidden_field :credit_image_cache %>
+		</p>
+	</fieldset>
+
+	<fieldset>
+		<h3>Similar Events</h3>
+		<%= f.fields_for :similar_events do |builder| %>
+			<p>
+				<%= builder.select :similar_id, @select_options.collect {|e| [ e.name, e.id ]}, { :include_blank => "None"} %>
+			</p>
+		<% end %>
+	</fieldset>
+
+	<fieldset>
+		<h3>Categories</h3>
+		<p>
+			<%= hidden_field_tag "event[category_ids][]", nil %>
+			<% Category.all.each do |category| %>
+				<%= check_box_tag "event[category_ids][]", category.id, @event.category_ids.include?(category.id) %>
+				<%= category.name.html_safe %><br/>
+			<% end %>
+		</p>
+	</fieldset>
+	
+	<fieldset>
+		<h3>Tags</h3>
+		<p>
+			<%= hidden_field_tag "event[tag_ids][]", nil %>
+			<% Tag.all.each do |tag| %>
+				<%= check_box_tag "event[tag_ids][]", tag.id, @event.tag_ids.include?(tag.id) %>
+				<%= tag.name.html_safe %><br/>
+			<% end %>
+		</p>
+	</fieldset>
+	
+	<fieldset>
+		<h3>Ticket Sale End Time</h3>
+		<p><em>This will cause performance ticket sale buttons to be switched to "Avail&nbsp;at&nbsp;Venue" at [This Value] hours before each performance's date. <br />Defaults to 2 hours. To never show "Avail at Venue", set to zero.<br />Applies to all performances of this event.</em></p>
+		<p>
+			<%= f.label :ticketing_end, "Hours before performance start to end ticket sales" %><br />
+			<%= f.text_field :ticketing_end %>
+		</p>
+	</fieldset>
+</div>
+
+<p class="buttons">
+	<%= f.submit %>
+</p>

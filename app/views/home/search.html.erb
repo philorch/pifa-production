@@ -1,0 +1,21 @@
+<div>
+	<%= image_tag("connector_top.jpg") %>
+</div>
+
+<div id="page">
+
+	<h2>Search Results for <strong>'<%= @search_term %>'</strong></h2>
+	
+	<% if @search_results.present? %>
+		<%= render :partial => 'shared/event', :collection => @search_results %>
+	<% else %>
+		<h3>No results - sorry!</h3>
+	<% end %>
+	
+</div>
+			
+<div id="connector_bottom">
+	
+	<%= image_tag("connector_bottom.jpg") %>
+	
+</div>

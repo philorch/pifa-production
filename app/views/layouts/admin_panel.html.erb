@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PIFA ADMIN PANEL</title>
+	<%= stylesheet_link_tag "admin", :media => "all" %>
+	<%= javascript_include_tag :application %>
+	<%= csrf_meta_tag %>
+</head>
+<body id="admin">
+
+	<div class="header">
+		<h1>PIFA Admin Panel</h1>
+		<% if admin_signed_in? %>
+			<%= link_to "Sign out", destroy_admin_session_path, :id => "sign_out" %>
+		<% end %>
+	</div>	
+
+	<% unless controller_name == "sessions" %>
+		<ul id="nav">
+			<li <% if controller_name == 'admin_panel' && @sync_page.nil? %>class="active"<% end %>>
+				<%= link_to "Events", admin_events_path %>
+			</li>
+			<li <% if controller_name == 'performances' %>class="active"<% end %>>
+				<%= link_to "Performances", performances_path %>
+			</li>
+			<li <% if controller_name == 'stories' %>class="active"<% end %>>
+				<%= link_to "Stories", stories_path %>
+			</li>
+			<li <% if controller_name == 'press_releases' %>class="active"<% end %>>
+				<%= link_to "Press Releases", press_releases_path %>
+			</li>
+			<li <% if @sync_page.present? %>class="active"<% end %>>
+				<%= link_to "Tessitura Sync", tessitura_sync_path %>
+			</li>
+		</ul>
+	<% end %>
+
+	<div id="container">
+		<%= yield %>
+	</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<%= form_for @story, :html => {:multipart => true} do |f| %>
+
+	<div class="column left">
+		<fieldset>
+			<h3>Story Content</h3>
+			<p>
+				<%= f.label :title %><br />
+				<%= f.text_field :title %>
+			</p>
+			<p>
+				<%= f.label :body %><br />
+				<%= f.text_area :body %>
+			</p>
+			<p>
+				<%= f.label :url_link %><br />
+				http://<%= f.text_field :url_link %>
+			</p>
+		</fieldset>
+
+		<fieldset>
+			<h3>Display Options</h3>
+			<p>
+				<%= f.label :text_color %><br />
+				<%= f.select(:text_color, options_for_select([['Black', 1], ['White', 2]], 1)) %>
+			</p>
+		</fieldset>
+	</div>
+
+	<div class="column right">
+		<fieldset>
+			<h3>Image Uploads</h3>
+			<p>
+				<%= f.label :image, "Slideshow Image" %><br/>
+				<%= image_tag(@story.image_url(:slideshowBg), :width => 310) if @story.image?%>
+				<%= f.file_field :image %>
+				<%= f.hidden_field :image_cache %>
+			</p>
+		</fieldset>
+	</div>
+
+	<p class="buttons">
+		<%= f.submit %>
+	</p>
+<% end %>

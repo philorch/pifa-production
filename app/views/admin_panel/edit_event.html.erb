@@ -1,0 +1,11 @@
+<h2>Edit Event > <%= @event.name %></h2>
+
+<p><%= link_to "Back", admin_events_path %></p>
+
+<%= render 'error_messages' %>
+
+<%= form_for @event, :url => { :controller => "events", :action => "update" } do |f| %>
+	
+	<%= render 'events_fields', :f => f %>
+	
+<% end %>

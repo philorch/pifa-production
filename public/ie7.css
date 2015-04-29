@@ -1,0 +1,45 @@
+/*hr {
+	display: list-item;
+	list-style: url(/assets/hr_large.png) inside;
+	margin-left: 0;
+}*/
+
+div.event-container div.showtimes div.slimScrollDiv {
+	width: 0px;
+}
+
+div.event-container img.buy-tickets-arrow {
+	margin-right: 0px;
+}
+
+div#events-popup div.category {
+	padding-top: 5px;
+	height: 25px;
+}
+
+div#events-popup div.category.exhibitions {
+	padding-top: 0px;
+	height: 30px;
+}
+
+div#wrapper div#content div#home div#promo-container div#promo-button-container {
+	position: relative;
+}
+
+/* Timeline Container */
+div#timeline-container {
+    overflow: visible;
+}
+div#timeline-container div#timeline-border {
+    overflow: visible;
+    margin-left: -14px;
+    background: url("/assets/timelineBorder_ie7.png") no-repeat;
+}
+div#timeline-container div#slide-bar {
+    max-height: 20px;
+    overflow: hidden;
+
+}
+div#timeline-container div#timeline-slider {
+    height:305px;
+}

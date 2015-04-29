@@ -1,0 +1,281 @@
+/* Generic */
+h1 {
+	color:#FFF;	
+	font-size:32px;
+	font-weight:normal;
+	text-transform:uppercase;
+	letter-spacing: 2px;
+	width:auto;
+	height:auto;
+	background:none;
+	text-indent:0px;
+	margin-bottom:14px;
+}
+
+.event-container {
+	position:relative;
+	width:750px;
+	min-height:179px;
+	background-color:#FFF;
+	background-repeat:no-repeat;
+	background-position:top left;
+	margin-bottom: 40px;
+	-webkit-box-shadow:  0px 0px 6px 0px #444;
+    box-shadow:  0px 0px 6px 0px #444;
+
+    .content {
+    	width: 100%;
+    	padding-top:35px;
+    	position: absolute;
+    	top: 0;
+    	left: 0;
+    }
+
+    .event-tags {
+		position:absolute;
+		bottom:47px;
+	} /* END event-tags */
+
+	.event-info {
+		float:right;
+		height:156px;
+		width:190px;
+		padding:15px 10px;
+		margin-top:-35px;
+		background-color:#FFF;
+
+		h3 {
+			margin: 0 0 8px;
+			padding:0px;
+			font-size:15px;
+			line-height:1;
+			width:auto;
+			height:auto;
+			background:none;
+			text-indent:0px;
+			
+			a {
+				color: #000;
+				&:link, &:visited { 
+					text-decoration: none;
+				}
+				&:hover, &:active { 
+					text-decoration: underline;
+				}
+			}
+		}
+
+		h4 {
+			margin: 0 0 10px;
+			padding:0px;
+			font-size:12px;
+			color:#144869;
+			width:auto;
+			height:auto;
+			background:none;
+			text-indent:0px;
+			line-height: 1.2;
+
+			span {
+				font-size: 11px;
+				color:#666;
+				line-height: 1.6;
+			}
+		}
+
+		p {
+			color:#144869;
+			font-size:12px;	
+			line-height:1.2;
+			margin:0px;
+			padding:0px;
+		}
+	} /* END event-info */
+
+	.showtimes {
+		height: 188px;
+		float:right;
+		width:0px;
+		padding: 10px 0px 16px;
+		margin-top:-35px;
+		overflow:hidden;
+
+		.scroll-container {
+			padding-right: 10px;		}
+
+		h5 {
+			font-size:14px;
+			text-transform:none;
+			font-style: italic;
+			margin: 0 0 16px;
+			color: #999;
+		}
+
+		h6 {
+			font-size:15px;
+			margin: 0;
+		}
+
+		table {
+			width:212px;
+			font-size:12px;
+			margin: 0;
+
+			tr td {
+				padding: 3px 0 0;
+			}
+		}
+
+		hr {
+			margin: 9px 0 6px;
+		}
+	}
+}
+
+.photo-caption {
+	color: #eee;
+	line-height:1;
+	height: 27px;
+	padding: 10px 15px;
+	width: 267px;
+	position: absolute;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.7);
+}
+
+.buy-button {
+	width:90px;
+	background:	#FFF407;
+	padding-top:3px;
+	padding-right:6px;
+	padding-left:6px;
+	text-transform:uppercase;
+	text-decoration: none;
+	color:#000;
+	font-size:11px;
+	line-height:14px;
+	font-weight:bold;
+}
+
+.close-button {
+	float:right;
+	cursor:pointer;
+	margin-top:-2px;
+	margin-right:4px;
+	font-size:13px;
+	font-weight:bold;
+	color:#666;	
+}
+
+.close-button:hover {
+	color:#000;	
+}
+
+.times-tickets, a.info-button {
+	font-size:15px;
+	line-height: 1;
+	text-transform:uppercase;
+	float:right;
+	color:#000;
+	width:194px;
+	background-color:#FFF407;
+	margin-top:-28px;
+	padding-top:6px;
+	padding-bottom:3px;
+	padding-left:16px;
+	height:19px;
+	color: black;
+	text-decoration: none;
+}
+.times-tickets:hover {
+	cursor:pointer;
+}
+img.buy-tickets-arrow {
+	float:right;
+	width:0px;
+	height:28px;
+	margin-top:-28px;
+	margin-right:209px;
+}
+
+.rectangle-image-container {
+	overflow: hidden;
+
+	img {
+		display: block;
+		float: left;
+	}
+}
+	
+.plaza{
+
+	padding: 0 10px;
+
+	h1{
+		color: black;
+		font-size: 40px;
+	}
+
+	p{
+		font-size: 16px;
+		width: 100%;
+	}
+
+	img{
+		border: solid 1px black;
+	}
+
+	#plaza-left{
+		float: left;
+		margin-right: 20px;
+
+		#time-machine-swf{
+			margin-bottom: 15px;
+		}
+
+		#time-machine-gif{
+			margin-bottom: 15px;
+		}
+
+		#wormhole{
+			float: left;
+			margin-right: 13px;
+		}
+
+		#food{
+			float: left;
+		}
+	}
+
+	#plaza-right{
+		float: left;
+
+		#flash-of-time{
+			margin-bottom: 11px;
+		}
+	}
+}
+
+@media all and (max-width: 1079px) {
+
+	#time-machine-swf{
+		display: none;
+	}
+
+	#time-machine-gif{
+		display: block;
+	}
+
+}
+
+@media all and (min-width: 1080px) {
+
+	#time-machine-swf{
+		display: block;
+	}
+
+	#time-machine-gif{
+		display: none;
+	}
+
+}

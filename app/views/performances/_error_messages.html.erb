@@ -1,0 +1,11 @@
+<% if @performance.errors.any? %>
+	<div id="error_explanation">
+		<p><strong><%= pluralize(@performance.errors.count, "error") %> prevented this performance from being saved:</strong></p>
+
+		<ul>
+			<% @performance.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>

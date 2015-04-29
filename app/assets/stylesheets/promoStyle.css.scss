@@ -1,0 +1,130 @@
+/* Stories section of the Index Page */
+
+#promo-container {
+	clear:both;
+	float:left;
+	position:relative;
+	height:344px;
+	width:628px;
+	margin:0px;
+	margin-top:18px;
+	margin-left:4px;
+	margin-bottom:18px;
+
+	#promo-button-container {
+		position:absolute;
+		float:left;
+		bottom:4px;
+		margin:10px;
+		margin-bottom:4px;
+		width:29px;
+
+		a {
+			display: block;
+			background: transparent url('/assets/promoButtonSprite.png') 0 0 no-repeat;
+			width: 29px;
+			height: 29px;
+			text-indent: -100px;
+			overflow: hidden;
+
+			&.activeSlide {
+				background-position: 0 -56px;
+				&:hover {
+					background-position: 0 -56px;
+				}
+			}
+
+			&:hover {
+				background-position: 0 -28px;
+			}
+		}
+	}
+
+	#promo-border {
+		position: absolute;
+		top: 0;
+		left: 48px;
+		z-index: 999;
+		pointer-events:none;
+	}
+}
+
+#promo-box {
+//	width:569px;
+//	height:342px;
+	overflow:hidden;
+	margin: 16px 0 0 55px;
+//	margin-left:52px;
+//	margin-right:3px;
+//	margin-top:6px;
+//	margin-bottom:6px;
+
+	#promo-sliding-container {
+
+		.promo-item {
+			float:left;
+			height:320px;
+			//width:512px;
+			width: 560px;
+			color:#FFF;
+			position: relative;
+			overflow: hidden;
+			a {
+				display: block;
+			}
+			img {
+				position: relative;
+			}
+
+			.promo-content {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 490px;
+				height: 270px;
+				padding: 25px 35px;
+
+				h2 {
+					float: right;
+					width: auto;
+					height: auto;
+					background: none;
+					text-indent: 0px;
+					text-align: right;
+					line-height: 1;
+					margin: 0 0 15px;
+					font-size: 45px;
+				}
+
+				.body-text {
+					float: right;
+					clear: right;
+					font-size: 30px;
+					line-height: 1.2;
+					margin-bottom: 10px;
+				}
+
+				a {
+					float: right;
+					clear: right;
+					color: #434343;
+					text-decoration: none;
+					font-size:16px;
+					letter-spacing: 1;
+					text-transform: uppercase; 
+				}
+
+				&.text {
+					background: transparent url('/assets/wash-brand.png');
+					color: black;
+
+					&.white {
+						color: white;
+						background: transparent url('/assets/wash-brand-dark.png');
+						a { color: #eee; }
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,20 @@
+# PostgreSQL. Versions 8.2 and up are supported.
+
+global: &global
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+  min_messages: warning
+  encoding: utf8
+  
+development:
+  database: pifa-2013_development
+  <<: *global
+
+test: &test
+  database: pifa-2013_test<%=ENV['TEST_ENV_NUMBER']%>
+  <<: *global
+
+production:
+  database: pifa-2013_production
+  <<: *global

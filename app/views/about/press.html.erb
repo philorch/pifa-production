@@ -1,0 +1,23 @@
+<p class="press-assets">TO ACCESS PIFA PRESS ASSETS <%= link_to "CLICK HERE", press_protected_path %></p>
+
+<ul class="press-releases">
+	<% @press_releases.each do |release| %>
+		<li class="release">
+			<h4><%= release.publish_date.strftime("%B %d, %Y") %></h4>
+			<h3><%= release.title %></h3>
+			<a href="#" class="show-release">Show Release</a>
+			<div class="release-contents">
+				<%= raw release.contents %>
+			</div>
+		</li>
+	<% end %>
+</ul>
+
+<script>
+	$(document).ready(function() {
+		$('.show-release').on('click', function() {
+			$(this).next('.release-contents').show();
+			$(this).hide();	
+		});
+	});
+</script>

@@ -1,0 +1,19 @@
+production:
+  solr:
+    hostname: localhost
+    port: 8983
+    log_level: WARNING
+    abortOnConfigurationError: false
+
+development:
+  solr:
+    hostname: localhost
+    port: 8982
+    log_level: INFO
+    abortOnConfigurationError: false
+
+test:
+  solr:
+    hostname: localhost
+    port: 8981
+    log_level: WARNING

@@ -1,0 +1,83 @@
+		<div class="event-container">
+			<div class="rectangle-image-container">
+				<%= image_tag event.image_url(:rectangle), :width => 297, :height => 214 %>
+				<%= image_tag event.image2_url(:rectangle), :width => 297, :height => 214 %>
+			</div>
+			<div class="content">
+				<div class="event-tags">
+					<% for category in event.categories %>
+						<span class="<%= category.class_name %>"><%= category.name.html_safe %></span>
+					<% end %>
+				</div>
+
+				<div class="event-info">
+					<h3><%= link_to event.name, event_path(event) %></h3>
+					<h4><span>performed by:</span><br/><%= event.performer %></h4>
+
+					<p class="address">
+						<% if event.next_performance.present? %>
+							<%= event.next_performance.location %><br/>
+						<% elsif event.location? %>
+							<%= event.location %><br/>
+						<% end %>
+						
+						<% if event.next_performance.present? %>
+							<%= event.next_performance.address %>, Phila PA
+						<% elsif event.address? %>
+							<%= event.address %>, Phila PA
+						<% end %>
+					</p>
+				</div>
+
+				<div class="showtimes">
+					<div class="close-button">X</div>
+					<h5>Showtimes for:</h5>
+					<div class="scroll-container">
+						<% event.get_dates.each_with_index do |date, i| %>
+						<% unless i == 0 %><hr/><% end %>
+							<h6><%= date.strftime("%b %d, %Y") %></h6>
+							<table>
+								<% Performance.find_by_date(event.id, date).each do |p| %>
+									<tr>
+						                <td align="left"><%= p.performance_date.strftime('%l:%M %P') %></td>
+										<td align="right">
+											<% if p.price_range.present? %>
+												<% if Time.zone.now > p.performance_date - event.ticketing_end.hours %>
+													<% if Time.zone.now > p.performance_date %>
+									
+													<% else %>
+							              				<span class="buy-button">Avail at Venue</span>
+													<% end %>
+							  					<% else %>
+													<a href="<%= p.active_ticket_url %>" class="buy-button">Buy Tickets</a> <%= p.id if params[:debug].present?%>
+												<% end %>
+											<% else %>
+							                	<span class="buy-button">On Sale TBD</span>
+											<% end %>
+										</td>
+						            </tr>
+	            				<% end %>
+							</table>
+						<% end %>
+					</div>
+				</div>
+	                       
+				<br clear="all" />
+	            
+	            <% if event.historic_date.present? %>     
+					<div class="photo-caption">
+						<%= event.historic_date_str if event.historic_date.present? %> &#8211; <%= event.historic_description %>
+					</div>
+				<% end %>
+	            
+
+	            <% if event.ticket_override? %>
+	            	<%= link_to "Information", event_path(event), :class => "info-button" %>
+	            <% else %>      
+					<div class="times-tickets">
+						Times &amp; Tickets
+					</div>
+					<%= image_tag("buyTicketsArrow.png", :class => "buy-tickets-arrow")%>
+				<% end %>
+			</div>
+		</div>

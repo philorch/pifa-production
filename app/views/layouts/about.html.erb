@@ -1,0 +1,56 @@
+<% content_for :content do %>
+
+<div id="about">
+	<div id="output">
+		<div id="paper">
+			<div id="paper_head"></div>
+			<div id="paper_foot"></div>
+			<div id="paper_content" class="clearfix">
+				<h2>About PIFA</h2>
+				<ul id="about-nav">
+					<li <% if controller.action_name == "index" %>class="active"<% end %>>
+						<%= link_to "About PIFA", about_path %>
+					</li>
+					<li <% if controller.action_name == "partners" %>class="active"<% end %>>
+						<%= link_to "Partners", partners_path %>
+					</li>
+					<li <% if controller.action_name == "press" %>class="active"<% end %>>
+						<%= link_to "Press", press_path %>
+					</li>
+					<li <% if controller.action_name == "tickets" %>class="active"<% end %>>
+						<%= link_to "Tickets", about_tickets_path %>
+					</li>
+					<li <% if controller.action_name == "contact" %>class="active"<% end %>>
+						<%= link_to "More Info", more_info_path %>
+					</li>
+					<li <% if controller.action_name == "more" %>class="active"<% end %>>
+						<%= link_to "Contact", contact_path %>
+					</li>
+					<li <% if controller.action_name == "privacy" %>class="active"<% end %>>
+						<%= link_to "Privacy Policy", privacy_path %>
+					</li>
+					<li <% if controller.action_name == "sponsors" %>class="active"<% end %>>
+						<%= link_to "Supporters", sponsors_path %>
+					</li>
+				</ul>
+			
+				<div id="about-content">
+					<%= yield %>
+				</div>
+			
+				<br clear="all" />
+			</div>
+		</div>
+	</div>
+
+	<img src="/assets/switch.png" id="switch" />
+		
+	<div id="buttons">
+		<img src="/assets/greenbutton.gif" />
+		<img src="/assets/redbutton.gif" />
+		<img src="/assets/redbutton.gif" />
+	</div>
+</div>
+
+<% end %>
+<%= render :template => 'layouts/application' %>

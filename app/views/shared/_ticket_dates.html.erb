@@ -1,0 +1,32 @@
+<div id="ticket-dates">
+    <div class="month"><p><%= event.start_date.strftime("%B") %></p></div>
+
+        <div id="dates-container">
+            <% 
+                dates_list = event.get_dates
+                j = 0
+				previous_date = nil
+            %>
+            <% dates_list.each do |date| %>
+				<% if previous_date.present? && date.to_date.month > previous_date.to_date.month %>
+					</div>
+					<div class="month"><p><%= date.strftime("%B") %></p></div>
+					<div id="dates-container">
+				<% end %>
+                <% if dates_list.include?(date) %>
+                    <a class="date select" id="d<%=j %>">
+                        <div class="weekday"><%= date.strftime("%a")[0] %><span class="long-day"><%= date.strftime("%a")[1..2] %></span></div>
+                        <div class="day-number"><%= date.strftime("%d") %></div>
+                    </a>
+                    <% j = j+1 %>
+                <% end %>
+				<% previous_date = date %>
+            <% end %>
+        </div>
+
+    <div class="select-date">Select A Date</div>
+</div>
+
+<ul id="showtimes-container">
+    <%= render 'shared/showtimes', :event => @event %>
+</ul>

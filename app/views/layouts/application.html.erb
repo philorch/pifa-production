@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Philadelphia International Festival of the Arts</title>
+	<meta name="description" content="What if you had a time machine...in 2013 you will. Come experience the 2013 Philadelphia International Festival of the Arts. March 28, 2013 – April 27, 2013">
+	<meta property="og:description" content="What if you had a time machine...in 2013 you will. Come experience the 2013 Philadelphia International Festival of the Arts. March 28, 2013 – April 27, 2013" />
+	<meta property="og:image" content="http://pifa.org/program.jpg" />
+
+	<%= stylesheet_link_tag "application", :media => "all" %>
+	<!--[if lte IE 8]><link href="/ie8.css" rel="stylesheet" type="text/css" /><![endif]-->
+	<!--[if lte IE 7]><link href="/ie7.css" rel="stylesheet" type="text/css" /><![endif]-->
+	<%= javascript_include_tag "application" %>
+	<%= javascript_include_tag "/javascripts/timelineScripts" %>
+	<%= javascript_include_tag "/javascripts/eventScripts" %>
+	<%= javascript_include_tag "/javascripts/navScripts" %>
+	<%= javascript_include_tag "/javascripts/promoScripts" %>
+	<%= javascript_include_tag "/javascripts/specificEventScripts" %>
+	<%= javascript_include_tag "/javascripts/appScripts" %>
+	<%= javascript_include_tag "/javascripts/googleMaps" %>
+	<%= javascript_include_tag "/javascripts/soundmanager2-jsmin" %>
+	
+	<%= csrf_meta_tags %>
+</head>
+<body>
+	<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>outdated!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+  <header>
+
+  </header>
+  
+	<div id="container">  
+		<div id="wrapper">
+			<div id="wrapper_head">
+				<a href="/"><div id="logo">PIFA - PHILADELPHIA INTERNATIONAL FESTIVAL OF THE ARTS - MARCH 28 - APRIL 27, 2013</div></a>
+				<!-- <p id="countdown_text">The countdown</p>
+				<div id="countdown">
+					<div class="days" id="days-countdown">000</div>
+					<div class="hms" id="hours-countdown">00</div>
+					<div class="hms" id="mins-countdown">00</div>
+					<div class="hms" id="seconds-countdown">00</div>
+				</div>
+				<div id="countdown_labels">
+					<span class="days">DAYS</span>
+					<span class="hrs">HRS</span>
+					<span class="min">MIN</span>
+					<span class="sec">SEC</span>
+				</div> -->
+				<div id="sponsor"></div>
+			</div>
+			<div id="wrapper_foot"></div>
+			<div id="content">
+				<div id="search-box">
+					<form name="searchForm" id="search-form" action="/search">
+						<input type="text" name="q" id="search-field" value="Search an artist, a venue..." />
+						<input type="submit" value="" />
+					</form>
+				</div>
+         
+				<ul id="nav">
+					<li class="events-calendar"><a id="events-calendar">Events/Calendar</a></li>
+					<li><%= link_to "Street Fair", streetfair_path %></li>
+					<li><%= link_to "Time Travel Plaza", plaza_path %></li>
+					<li class="about-pifa-nav"><%= link_to "About PIFA", about_path %></li>
+					<!--<li><%= link_to "Visitors Guide", about_path %></li>-->
+					<li><a id="search">SEARCH</a></li>
+				</ul>
+				
+				<div <%= "id="+content_for(:body_id) if content_for(:body_id) %>>
+					<%= content_for?(:content) ? yield(:content) : yield %>
+				</div>
+				
+				<%= render "shared/events_popup" %>
+				
+			</div>
+		</div>
+	</div>
+	
+	<a href="http://kimmelcenter.org"><footer></footer></a>
+
+	<script>
+		var _gaq=[['_setAccount','UA-12794814-1'],['_trackPageview']];
+		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+		g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+		s.parentNode.insertBefore(g,s)}(document,'script'));
+	</script>
+	<script>
+
+		var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+		var is_ie = navigator.userAgent.toLowerCase().indexOf('trident') > -1;
+
+		if (!is_chrome && !is_ie){
+			$(document).ready(initSounds);
+		}
+
+		function gSoundPlay() {
+			soundManager.play('gSound');
+		}
+		function cSoundPlay() {
+			soundManager.play('cSound');
+		}
+		
+		function initSounds(){
+			soundManager.setup({
+			  debugMode: false,
+			  url: '/assets/',
+			  onready: function() {
+			    var gSound = soundManager.createSound({
+			      id: 'gSound',
+			      url: '/assets/g-click.mp3'
+			    });
+			    var cSound = soundManager.createSound({
+			      id: 'cSound',
+			      url: '/assets/c-click.mp3'
+			    });
+			  },
+			  ontimeout: function() {
+			    // Hrmm, SM2 could not start. Missing SWF? Flash blocked? Show an error, etc.?
+			  },
+			  defaultOptions: {
+			    // set global default volume for all sound objects
+			    volume: 33
+			  }
+			});
+			$("#nav a").mouseover(gSoundPlay);
+			$("#promo-button-container a").click(cSoundPlay);
+		};
+		
+	</script>
+
+	<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+	<script type="text/javascript">
+	adroll_adv_id = "XMRD6GLZ4JCMJDW7HDSSND";
+	adroll_pix_id = "VHCWCR72HFBJLAFQQX5YW4";
+	(function () {
+	var oldonload = window.onload;
+	window.onload = function(){
+	   __adroll_loaded=true;
+	   var scr = document.createElement("script");
+	   var host = (("https:" == document.location.protocol) ?
+	"https://s.adroll.com" : "http://a.adroll.com");
+	   scr.setAttribute('async', 'true');
+	   scr.type = "text/javascript";
+	   scr.src = host + "/j/roundtrip.js";
+	   ((document.getElementsByTagName('head') || [null])[0] ||
+    
+	document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+	   if(oldonload){oldonload()}};
+	}());
+	</script>
+	
+	<!-- <a id='mowebLink' onclick='InstantEncoreMobileWeb.viewMobile()'>View Mobile Site</a> -->
+	
+</body>
+</html>

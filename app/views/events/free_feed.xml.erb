@@ -1,0 +1,20 @@
+<Performances>
+<% @events.each do |event| %>
+	<% event.performances.each do |performance| %>
+		<Performance>
+			<perf_no><%= performance.inventory_number %></perf_no>
+			<perf_date><%= performance.performance_date.strftime("%Y-%m-%dT%l:%M:%S%z") %></perf_date>
+			<description><%= event.name %></description>
+			<synopsis><%= event.description %></synopsis>
+			<facility_desc><%= event.location %></facility_desc>
+			<image><%= event.image %></image>
+			<prod_type_desc>TP Non Kimmel Center</prod_type_desc>
+			<season_no>624</season_no>
+			<season_desc>OT13 PIFA Events</season_desc>
+			<free_event>False</free_event>
+			<free_ticketed>False</free_ticketed>
+			<free_ticketed_desc></free_ticketed_desc>
+		</Performance>
+	<% end %>
+<% end %>
+</Performances>

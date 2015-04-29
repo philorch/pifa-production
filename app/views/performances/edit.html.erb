@@ -1,0 +1,9 @@
+<h2>Edit Performance > <%= @performance.performance_date.strftime("%B %d") + " - " + @performance.event.name %></h2>
+
+<p><%= link_to "Back", performances_path %></p>
+
+<%= render 'error_messages' %>
+
+<p>** This information will get overwritten by Tessitura during sync! You are advised to change this info in the Tessitura feed.</p>
+
+<%= render 'form' %>

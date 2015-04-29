@@ -1,0 +1,6 @@
+<% if @event.address.present? %>
+	<form>
+		<input type="hidden" name="google_address" id="google_address" value="<%= @event.address %> Philadelpia, PA <%= @event.zip %>" />
+	</form>
+	<div id="map_canvas"></div>
+<% end %>

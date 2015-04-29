@@ -1,0 +1,34 @@
+<div id="events-popup">
+	<p>Choose a Date or an Event Category</p>
+	<%= link_to "View All Events", events_path, :id => "view-all" %>
+	
+	<div class="date-row" style="margin-top:2px;">
+		
+		<div id="<%= $CALENDAR[:start].strftime('%B').downcase %>" class="month"><div class="month-name"><%= $CALENDAR[:start].strftime('%B') %></div></div>
+	
+	<% ($CALENDAR[:start]..$CALENDAR[:end]).each_with_index do |date, i| %>
+		<% if date.day == 1 %>
+			<div id="<%= date.strftime('%B').downcase %>" class="month"><div class="month-name"><%= date.strftime('%B') %></div></div>
+		<% end %>
+		
+		<a href="<%= events_day_path(date.to_date) %>" class="date <% if date < $CALENDAR[:test] %> past <% elsif date > $CALENDAR[:test] %> future <% else %> current <% end %>">
+			<span class="weekday"><%= date.strftime("%a")[0] %><span class="long-day"><%= date.strftime("%a")[1..2] %></span></span>
+			<span class="day-number"><%= date.strftime("%d") %></span>
+		</a>
+		
+		<% if i == 14 %>
+			</div>
+			<div class="date-row" style="border-top:none">
+		<% end %>
+	<% end %>
+	
+	</div>
+	
+	<% Category.all.each do |category| %>
+		<% if category.events.published.present? %>
+			<div class="<%= category.class_name %> category">
+				<%= link_to category.name.html_safe, events_category_path(category.id) %>
+			</div>
+		<% end %>
+	<% end %>
+</div>

@@ -1,0 +1,37 @@
+<% event.get_dates.each do |date| %>
+    <li class="showtimes">
+
+        <div class="close-button">X</div>
+        <h5>Showtimes for:</h5>
+        <h6><%= date.strftime("%b %d, %Y") %></h6>
+        <table>
+            <% Performance.find_by_date(event.id, date).each_with_index do |p, i| %>
+            	<% unless i == 0 %><tr class="showtimes-divider"><td colspan="2"></td></tr><% end %>
+	            <tr>
+	                <td align="left">
+						<% if event.id == 39 # special fly city case %>
+							<%= "Various Times" %>&nbsp;&nbsp;&nbsp;
+						<% else %>
+							<%= p.performance_date.strftime('%l:%M %P') %>&nbsp;&nbsp;&nbsp;
+						<% end %>
+					</td>
+	                <td align="right">
+	               		<% if p.price_range.present? %>
+							<% if Time.zone.now > p.performance_date - event.ticketing_end.hours %>
+								<% if Time.zone.now > p.performance_date %>
+								<% else %>
+		              				<span class="buy-button">Avail at Venue</span>
+								<% end %>
+		  					<% else %>
+								<a href="<%= p.active_ticket_url %>" class="buy-button">Buy Tickets</a>
+							<% end %>
+							<%= p.id if params[:debug].present?%>
+						<% else %>
+		                	<span class="buy-button">On Sale TBD</span>
+						<% end %>
+	                </td>
+	            </tr>
+            <% end %>
+        </table>
+    </li>
+<% end %>

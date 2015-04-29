@@ -1,0 +1,176 @@
+<div>
+	<%= image_tag("connector_top.jpg") %>
+</div>
+
+<div id="page" class="event">
+	<h2><%= @event.name %></h2>
+	<h3><%= @event.performer %></h3>
+	
+	<div id="eventspec-container">
+
+		<div class="rectangle-image-container event-banner">
+			<%= image_tag @event.image_url(:rectangle), :width => 375, :height => 270 %>
+			<%= image_tag @event.image2_url(:rectangle), :width => 375, :height => 270 %>
+		</div>
+
+		<div class="eventspec-info">
+			<div class="event-tags">
+				<% for category in @event.categories %>
+					<span class="<%= category.class_name %>"><%= category.name.html_safe %></span>
+				<% end %>
+        	</div>
+
+        	<% if @event.historic_date.present? %>
+				<p class="photo-caption">
+					<%= (@event.historic_date_str+" &#8211;").html_safe %> <%= @event.historic_description %>
+				</p>
+			<% end %>
+		</div>
+		
+
+		<div id="eventspec-content">
+			<% if @event.description? %>
+				<%= @event.description.html_safe %>
+			<% end %>
+			<br /><br />
+			
+			<div class="text tag-list">
+				<% if @event.tags.present? %>
+					TAGS: 
+					<% for tag in @event.tags %>
+						<%= link_to tag.name.html_safe, events_tag_path(tag) %>
+					<% end %>
+				<% end %>
+				<hr />
+			</div>
+
+			<% if @event.artistic_credit? %>
+				<div class="credits">
+					<h6>Artistic Credits</h6>
+					<p><%= image_tag(@event.credit_image_url, :width => 150) if @event.credit_image?%></p>
+					<p><%= @event.artistic_credit.html_safe %></p>
+					<hr />
+				</div>
+			<% end %>
+			
+			<% if @event.similar_events.present? %>
+				<div id="similar-events">
+					<h5>Other Events You Might Like</h5>
+					
+					<% for similar_event in @event.similar_events %>
+						<% e = Event.find(similar_event.similar_id) %>
+						<div class="event">
+
+							<div class="rectangle-image-container">
+								<a href="<%= event_path(e) %>">
+									<%= image_tag e.image_url(:timeline), :width => 95, :height => 68 %>
+									<%= image_tag e.image2_url(:timeline), :width => 95, :height => 68 %>
+								</a>
+							</div>
+
+							<h6><%= link_to e.name, event_path(e) %></h6>
+							<p><%= e.date_range %></p>
+							<p class="inline-tags">
+								<% for category in e.categories %>
+									<span class="<%= category.class_name %>"><%= category.name.html_safe %></span>
+								<% end %>
+							</p>
+						</div>
+					<% end %>
+				</div>
+			<% end %>
+
+			<% if @event.next_performance.present? && (@event.next_performance.address? || @event.address?) %>
+				<%= render 'shared/google_map', :event => @event %>
+			<% end %>
+
+		</div>
+			
+		<div id="eventspec-details">
+			
+			<% if @event.date_range.present? %><h4 id="date-range"><%= @event.date_range %></h4><% end %>
+			<% if @event.price_range.present? %><h5 id="price-range"><%= @event.price_range %></h5><% end %>
+
+			
+			<div class="event-address">
+				<% showing_performance_addresses = false %>
+				<% @performances_with_unique_locations.each do |performance| %>
+					<% if performance.address.present? %>
+						<p>
+							<% if performance.location.present? %>
+								<%= performance.location %><br />
+							<% end %>
+							<% if performance.address.present? %>
+								<%= performance.address %><br />
+							<% end %>
+							<% if performance.zip.present? %>
+								Phila, PA <%= performance.zip %>
+							<% end %>
+							<br />
+							<% if @event.address.present? %><a href="#map_canvas" class="black" >view map</a><% end %>
+						</p>
+						<% showing_performance_addresses = true %>
+					<% end %>
+				<% end %>
+				<% if !showing_performance_addresses %>
+					<% if @event.location.present? %>
+						<p>
+							<% if @event.location.present? %>
+								<%= @event.location %><br />
+							<% end %>
+							<% if @event.address.present? %>
+								<%= @event.address %><br />
+							<% end %>
+							<% if @event.zip.present? %>
+								Phila, PA <%= @event.zip %>
+							<% end %>
+							<br />
+							<% if @event.address.present? %><a href="#map_canvas" class="black" >view map</a><% end %>
+						</p>
+					<% end %>
+				<% end %>
+			</div>
+
+			<% if @event.ticket_override? %>
+				<div>
+					<%= @event.ticket_override.html_safe %>
+				</div>
+				<% if @event.show_default_purchase_button == true %>
+					<%= render partial: "shared/ticket_button" %>
+				<% end %>
+        	<% else %>
+				<%= render partial: "shared/ticket_button" %>
+			<% end %>
+			
+			<hr />
+
+			<div class="share">
+				<h6>Share this PIFA event</h6>
+				<div class="facebook">
+					<iframe src="//www.facebook.com/plugins/like.php?href=<%= request.url %>&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=143398915805956" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>
+				</div>
+				<div class="pinterest">
+					<a href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.pifa.org&media=<%=u @event.image_url(:rectangle) %>&description='<%=u @event.name %>'%20on%20PIFA.org." class="pin-it-button" count-layout="horizontal"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a>
+				</div>
+				<div class="twitter">
+					<a href="https://twitter.com/share" class="twitter-share-button" data-text="Look at '<%= @event.name %>' on PIFA.org.">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				</div>
+			</div>
+
+			<hr />
+
+			<div class="website">
+				<% if @event.web_address.present? %>
+					<a href="<%= @event.web_address %>" target="_blank">This event on Tumblr</a>
+				<% end %>
+			</div>
+			
+		</div>
+	</div>
+	
+</div>
+
+<div id="connector_bottom">
+	<%= image_tag("connector_bottom.jpg") %>
+</div>

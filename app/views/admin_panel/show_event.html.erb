@@ -1,0 +1,198 @@
+<h2><%= @event.name %></h2>
+
+<p>
+  <%= link_to "Edit", admin_edit_event_path(@event) %> |
+  <%= link_to "Destroy", @event, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", admin_events_path %>
+</p>
+
+<% if flash[:notice] %><div class="notice"><p><%= flash[:notice] %></p></div><% end %>
+<% if flash[:error] %><div class="error"><p><%= flash[:error] %></p></div><% end %>
+
+<div class="container">
+	<div class="column left">
+		<div class="group">
+			<h3>General Information</h3>
+			<p>
+			  <strong>Performer</strong><br/>
+			  <%= @event.performer? ? @event.performer : "&nbsp;".html_safe %>
+			</p>
+
+			<p>
+			  <strong>Description</strong><br/>
+			  <%= @event.description? ? @event.description : "&nbsp;".html_safe %>
+			</p>
+
+			<p>
+			  <strong>Artistic Credit</strong><br/>
+			  <%= @event.artistic_credit? ? @event.artistic_credit : "&nbsp;".html_safe %>
+			</p>
+		</div>
+
+		<div class="group">
+			<h3>Time in History</h3>
+			<p>
+			  <strong>Date</strong><br/>
+			  <%= @event.historic_date? ? @event.historic_date.strftime("%b %d, %Y") : "&nbsp;".html_safe %>
+			</p>
+
+			<p>
+			  <strong>Description</strong><br/>
+			  <%= @event.historic_description? ? @event.historic_description : "&nbsp;".html_safe %>
+			</p>
+		</div>
+
+		<div class="group">
+			<h3>Location</h3>
+			<p><em>Note: Any location fields set in a Performance may override this location information.</em></p>
+			<p>
+				<strong>Name</strong><br/>
+				<%= @event.location? ? @event.location : "&nbsp;".html_safe %>
+			</p>
+			<p>
+				<strong>Street Address</strong><br/>
+				<%= @event.address? ? @event.address : "&nbsp;".html_safe %>
+			</p>
+			<p>
+				<strong>Zip Code</strong><br/>
+				<%= @event.zip? ? @event.zip : "&nbsp;".html_safe %>
+			</p>
+		</div>
+
+		<div class="group">
+			<h3>Ticketing Override</h3>
+			<p><em>This will replace Ticket info on the Event page. Setting this will also replace the "Times &amp; Tickets" button on index and search pages with an "Information" button</em></p>
+			<p>
+				<strong>Text</strong><br/>
+				<%= @event.ticket_override? ? @event.ticket_override : "None" %>
+			</p>
+		</div>
+	</div>
+
+	<div class="column right">
+
+		<div class="group">
+			<h3>Publish Options</h3>
+			<% if @event.publish? %>
+				<p><em>Note: Even when set to publish, an Event will not show if it has no Performances linked to it.</em></p>
+				<p><strong>Status:</strong> <span class="green">Published</span></p>
+
+			<% else %>
+				<p><strong>Status:</strong> <span class="red">Hidden</span></p>
+			<% end %>
+		</div>
+
+		<div class="group">
+			<h3>Image Uploads</h3>
+				<p>
+					<strong>Timeline Image</strong> <em>(Not actual size)</em><br/>
+					<% if @event.image? %>
+						<%= link_to image_tag(@event.image_url(:timeline), :width => 200), @event.image_url(:timeline), :target => "_blank" %>
+					<% else %>
+						None
+					<% end %>
+				</p>
+
+				<p>
+					<strong>Rectangle Image</strong> <em>(Not actual size)</em><br/>
+					<% if !@event.image? && !@event.image2? %>
+						None
+					<% else %>
+						<span class="image_preview">
+							<% if @event.image? %>
+								<%= link_to image_tag(@event.image_url(:rectangle), :width => 150), @event.image_url(:rectangle), :target => "_blank" %>
+							<% end %>
+							<% if @event.image2? %>
+								<%= link_to image_tag(@event.image2_url(:rectangle), :width => 150), @event.image2_url(:rectangle), :target => "_blank" %>
+							<% end %>
+						</span>
+					<% end %>
+				</p>
+
+				<p>
+					<strong>Rectangle Thumbnail</strong><br/>
+					<% if !@event.image? && !@event.image2? %>
+						None
+					<% else %>
+						<span class="image_preview">
+							<% if @event.image? %>
+								<%= link_to image_tag(@event.image_url(:timeline), :width => 95), @event.image_url(:timeline), :target => "_blank" %>
+							<% end %>
+							<% if @event.image2? %>
+								<%= link_to image_tag(@event.image2_url(:timeline), :width => 95), @event.image2_url(:timeline), :target => "_blank" %>
+							<% end %>
+						</span>
+					<% end %>
+				</p>
+
+				<p>
+					<strong>Artistic Credit Image</strong><br/>
+					<% if @event.credit_image? %>
+						<%= link_to image_tag(@event.credit_image_url, :width => 150), @event.credit_image_url, :target => "_blank" %>
+					<% else %>
+						None
+					<% end %>
+				</p>
+		</div>
+
+		<div class="group">
+			<h3>Similar Events</h3>
+			<% if @event.similar_events.present? %>
+				<ol>
+					<% for similar_event in @event.similar_events %>
+					<li><%= Event.find(similar_event.similar_id).name %></li>
+					<% end %>
+				</ol>
+			<% else %>
+				<p>None</p>
+			<% end %>
+		</div>
+
+		<div class="group">
+			<h3>Categories</h3>
+			<% if @event.categories.present? %>
+				<ul>
+					<% for category in @event.categories %>
+					<li><%= category.name.html_safe %></li>
+					<% end %>
+				</ul>
+			<% else %>
+				<p>None</p>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="group">
+			<h3>List of Performances</h3>
+			<% if @event.performances.present? %>
+				<table>
+					<tr>
+						<th>Date</th>
+						<th>Location</th>
+						<th>ID</th>
+						<th>Status</th>
+						<th></th>
+					</tr>
+					<% for performance in @event.performances.order("performance_date") %>
+					<tr class="<%= cycle("odd", "even") %>">
+						<td><%= performance.performance_date.strftime("%B %d, %Y") %></td>
+						<td><%= performance.location %></td>
+						<td><%= performance.id %></td>
+						<td>
+							<% if performance.publish? %>
+								<span class="green">Published</span>
+							<% else %>
+								<span class="red">Hidden</span>
+							<% end %>
+						</td>
+						<td><%= link_to "Edit", edit_performance_path(performance) %></td>
+					</tr>
+					<% end %>
+				</table>
+			<% else %>
+				<p>None</p>
+			<% end %>
+		</div>
+	</div>
+</div>

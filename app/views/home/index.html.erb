@@ -1,0 +1,62 @@
+<script type='text/javascript'>
+(function() {
+var ie = document.createElement('script'); ie.type = 'text/javascript'; ie.async = true;
+ie.src = 'https://www.instantencore.com/Utilities/MoWebJavaScript/5149125/script.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ie, s);
+})();
+</script>
+
+<% content_for :body_id do %>home<% end %>
+
+<div id="promo-container">
+	<div id="promo-button-container"></div>
+	<div id="promo-box">
+		<div id="promo-sliding-container">
+			<% @stories.each do |story| %>
+				<div class="promo-item">
+					<% if story.url_link? %><a href="http://<%= story.url_link %>" target="_blank"><% end %>
+					<%= image_tag story.image_url(:slideshowBg) %>
+					<div class="promo-content <%= story.color_name %> <% if story.body? || story.title?%>text<% end %>">
+						<% if story.title? %><h2><%= story.title.html_safe %></h2><% end %>
+						<% if story.body? %><div class="body-text"><%= story.body.html_safe %></div><% end %>
+					</div>
+					<% if story.url_link? %></a><% end %>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	<img src="/assets/promoBorder.png" id="promo-border"/> 
+</div>
+                    
+<div id="right-side-container">
+	<!-- <p>If you had a<br /> time machine...<br />in 2013 you will.</p>
+		<hr class="small" />
+		<a href="http://pifa-philly.tumblr.com" target="_blank"><img src="/assets/timeMachine_home.png" /></a>
+		 -->
+		
+	<div id="tumblr-feed">
+		<h3>Where will you #timetravel2?</h3>
+
+		<% if @tumblr_feed.present? %>
+			<% @tumblr_feed.items[0..0].each do |item| %>
+				<div class="item">
+					<h4><%= link_to item.title, item.link %></h4>
+					<%= raw(@html_decoder.decode truncate(item.description, :length => 200)) %>
+				</div>
+			<% end %>
+		<% end %>
+		<a class="tumblr-link" href="http://pifa-philly.tumblr.com/tagged/timetravel2">READ MORE ON TUMBLR</a>
+	</div>
+	<div id="social-media-icon-container">
+		<a href="https://www.facebook.com/PIFA.Philly" target="_blank"><img src="/assets/social_facebook.png" /></a>
+		<a href="https://twitter.com/pifaphilly" target="_blank"><img src="/assets/social_twitter.png" /></a>
+		<a href="http://pinterest.com/kimmelcenter/pifa" target="_blank"><img src="/assets/social_pinterest.png" /></a>
+	</div>
+</div>
+
+<hr class="large" />
+                    
+<%= render "shared/timeline" %>
+
+<!-- tracking -->
+<script>document.write('<s'+'cript language="JavaScript" src="http://view.atdmt.com/jaction/PFA_20130205_Pifa_Homepage"></s'+'cript>')</script><noscript><iframe src="http://view.atdmt.com/iaction/PFA_20130205_Pifa_Homepage" width="1" height="1" frameborder="0" scrolling="No" marginheight="0" marginwidth="0" topmargin="0" leftmargin="0"></iframe></noscript>

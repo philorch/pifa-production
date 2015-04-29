@@ -1,0 +1,48 @@
+<h2><%= @story.title %></h2>
+
+<p>
+  <%= link_to "Edit", edit_story_path(@story) %> |
+  <%= link_to "Destroy", @story, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", stories_path %>
+</p>
+
+<% if flash[:notice] %><div class="notice"><p><%= flash[:notice] %></p></div><% end %>
+<% if flash[:error] %><div class="error"><p><%= flash[:error] %></p></div><% end %>
+
+<div class="container">
+	<div class="column left">
+		<div class="group">
+			<h3>Story Content</h3>
+			<p>
+			  <strong>Body</strong><br/>
+			  <%= @story.body? ? @story.body : "&nbsp;".html_safe %>
+			</p>
+			<p>
+			  <strong>External Url</strong><br/>
+			  http://<%= @story.url_link %>
+			</p>
+		</div>
+
+		<div class="group">
+			<h3>Display Options</h3>
+			<p>
+				<strong>Text Color</strong><br/>
+				<%= @story.color_name %>
+			</p>
+		</div>
+	</div>
+
+	<div class="column right">
+		<div class="group">
+			<h3>Image Uploads</h3>
+			<p>
+			  	<strong>Slideshow Background Image</strong><br/>
+			  	<% if @story.image? %>
+					<%= link_to image_tag(@story.image_url(:slideshowBg), :width => 310), @story.image_url(:slideshowBg) %>
+				<% else %>
+					None
+				<% end %>
+			</p>
+		</div>
+	</div>
+</div>

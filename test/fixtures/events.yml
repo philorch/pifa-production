@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  performer: MyString
+  description: MyText
+  artistic_credit: MyText
+  historic_date: 2012-08-14
+  historic_description: MyString
+
+two:
+  name: MyString
+  performer: MyString
+  description: MyText
+  artistic_credit: MyText
+  historic_date: 2012-08-14
+  historic_description: MyString

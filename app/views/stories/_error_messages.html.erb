@@ -1,0 +1,11 @@
+<% if @story.errors.any? %>
+	<div id="error_explanation">
+		<p><strong><%= pluralize(@story.errors.count, "error") %> prevented this story from being saved:</strong></p>
+
+		<ul>
+			<% @story.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>

@@ -1,0 +1,38 @@
+<h2>Performances</h2>
+
+<p>This is mostly content copied over from the Tessitura feed.</p>
+
+<p>
+	<%= link_to "Add New Performance", new_performance_path %>
+</p>
+
+<table>
+	<tr>
+		<th>Date</th>
+		<th>Event</th>
+		<th>Location</th>
+		<th>Status</th>
+		<th>Last Updated</th>
+		<th>ID</th>
+		<th></th>
+		<th></th>
+	</tr>
+	<% @performances.each do |performance| %>
+		<tr class="<%= cycle('odd', 'even')%>">
+			<td><%= performance.performance_date.strftime("%B %d") %></td>
+			<td><% if performance.event.present? %><%= performance.event.name %><% end %></td>
+			<td><%= performance.location %></td>
+			<td>
+				<% if performance.publish? %>
+					<span class="green">Published</span>
+				<% else %>
+					<span class="red">Hidden</span>
+				<% end %>
+			</td>
+			<td><%= performance.updated_at %></td>
+			<td><%= performance.id %></td>
+			<td><%= link_to "view", performance_path(performance.id) %></td>
+			<td><%= link_to "edit", edit_performance_path(performance.id) %></td>
+		</tr>
+	<% end %>
+</table>

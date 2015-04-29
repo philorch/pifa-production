@@ -1,0 +1,11 @@
+<% if @contact.errors.any? %>
+	<div id="error_explanation">
+		<p><%= pluralize(@contact.errors.count, "error") %> prevented submission. Please complete all required fields.</p>
+
+<!-- 		<ul>
+			<% @contact.errors.full_messages.each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul> -->
+	</div>
+<% end %>

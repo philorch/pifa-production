@@ -1,0 +1,151 @@
+#timeline-container {
+	width:825px;
+	margin-left:auto;
+	margin-right:auto;
+	position:relative;
+	font-family:"Trebuchet MS", "Helvetica Neue", Helvetica, Arial, Sans-serif;
+  background: #000000;
+  background: -moz-linear-gradient(top,  #000000 60%, #345d71 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(60%,#000000), color-stop(100%,#345d71));
+  background: -webkit-linear-gradient(top,  #000000 60%,#345d71 100%);
+  background: -o-linear-gradient(top,  #000000 60%,#345d71 100%);
+  background: -ms-linear-gradient(top,  #000000 60%,#345d71 100%);
+  background: linear-gradient(to bottom,  #000000 60%,#345d71 100%);
+
+	#timeline-slider {
+		position:relative;
+		width:799px;
+		height:289px;
+		margin-top:4px;
+		margin-left:13px;
+		overflow:hidden;
+
+
+		#sliding-container {
+			margin-top:30px;
+			min-height:240px;
+			max-height:	240px;
+			z-index:0;
+          overflow: hidden;
+		}	
+	}
+
+	img#slide-bar {
+		margin-top:-4px;
+		opacity:0.999; /* Hack to fix issue with z-index and opacity */
+	}
+
+	img#red-slider {
+		position:absolute;
+		top:252px;
+		cursor:pointer;
+	}
+
+	#timeline-border {
+		position:absolute;
+		pointer-events:none;
+        background: url("/assets/timelineBorder.png") no-repeat;
+        width:825px;
+        margin-top:-13px;
+        height: 320px;
+	}
+}
+
+.slider-event {
+	float:left;
+	position: relative;
+	width:290px;
+	height:237px;
+	min-height:224px;
+	margin-left:4px;
+	margin-right:4px;
+	padding-right:14px;
+	//background: transparent url('/assets/sliderBoxBg.png') center bottom no-repeat;
+
+	.wash {
+		width:304px;
+		height:237px;
+		background: transparent url('/assets/wash-timeline.png') center top no-repeat;
+		position: absolute;
+		top: 0;
+		left: 0;
+        cursor: pointer;
+	}
+
+	&.past {
+		opacity:0.65;
+	}
+
+	.historic, .info {
+		position: absolute;
+		width: 180px;
+		padding-left: 114px;
+		left: 0;
+	}
+
+	.historic {
+		top: 10px;
+	}
+
+	.info {
+		bottom: 50px;
+	}
+
+	.event-tags {
+		position: absolute;
+		bottom: 50px;
+	}
+
+	h3 {
+		color: black;
+		width:auto;
+		text-indent:0px;
+		background:none;
+		margin:0px;
+		font-size:15px;
+		text-align:right;
+		line-height:1;
+		margin-top:18px;
+		margin-bottom:1px;
+		text-transform: none;
+		letter-spacing: 0px;
+	}
+
+	p {
+		text-align:right;
+		color:#222;
+		font-size:13px;
+		line-height:1.2;
+		width: 150px;
+		margin:0;
+		float: right;
+
+		&.historic-date {
+			font-size: 16px;
+			color:#7e0303;
+		}
+
+		&.event-date {
+			font-size:12px;
+			color:black;
+		}
+	}
+
+	.tix-info {
+		float: right;
+		margin-top:12px;
+		line-height: 1;
+		background-color:#fff407;
+		text-align:center;
+		text-transform: uppercase;
+		padding: 5px 8px;
+		font-size: 12px;
+		letter-spacing: 1px;
+		font-weight: bold;
+
+		a {
+			color:black;
+			text-decoration:none;	
+		}
+	}
+}

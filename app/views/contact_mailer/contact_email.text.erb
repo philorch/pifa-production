@@ -1,0 +1,13 @@
+<%= @contact[:message] %>
+
+From:
+<%= @contact[:firstname] %> <%= @contact[:lastname] %>
+
+Email:
+<%= @contact[:email] %>
+
+Address:
+<% if @contact[:address1].present? %><%= @contact[:address1] %><% end %>
+<% if @contact[:address2].present? %><%= @contact[:address2] %><% end %>
+<% if @contact[:city].present? %><%= @contact[:city] %><% end %>
+<% if @contact[:zip].present? && @contact[:zip] > 0 %><%= @contact[:zip] %><% end %>

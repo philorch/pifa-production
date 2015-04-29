@@ -1,0 +1,11 @@
+<h2>Create a new Event</h2>
+
+<p><%= link_to "Back", admin_events_path %></p>
+
+<%= render 'error_messages' %>
+
+<%= form_for @event, :url => { :controller => "events", :action => "create" } do |f| %>
+	
+	<%= render 'events_fields', :f => f %>
+	
+<% end %>

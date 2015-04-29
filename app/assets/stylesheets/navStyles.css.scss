@@ -1,0 +1,293 @@
+/* Navigation links and popups */
+
+ul#nav {
+	list-style-type: none;
+	margin: 0px auto;
+	height: 48px;
+	padding: 0;
+	background: url("/assets/bg_nav_tmp.jpg") no-repeat;
+	//background: url("/assets/bg_nav.jpg") no-repeat;
+	font-weight:normal;
+
+	li {
+		float: left;
+		margin: 11px 44px;
+		//margin: 11px 34px;
+		font-size:16px;
+		font-weight:normal;
+
+		a {
+			color:#FFF;
+			text-decoration: none;
+			text-shadow: 3px 3px 3px #000000;
+			font-weight:normal;
+
+			&:hover{
+				color:#ffb814;
+				text-decoration: none;
+				text-shadow: 3px 3px 3px #000000;
+			}
+		}
+
+        //&.events-calendar {
+        //  margin: 11px 30px 11px 48px;
+        //}
+        //
+        //&.about-pifa-nav {
+        //  margin-left: 22px;
+        //}
+
+		&.about-pifa {
+          a {
+            display: block;
+            background: url("/assets/button-about.png");
+            width: 156px;
+            height: 43px;
+          }
+        }
+
+		&.get-involved a {
+			display: block;
+			background: url("/assets/button-get-involved.png");
+			width: 156px;
+			height: 43px
+		}
+	}
+}
+
+#search {
+	margin-right:0px;
+}
+
+#search, #events-calendar {
+	cursor:pointer;	
+}
+
+/* SEARCH popup */
+#search-box {
+	display:none;
+	position:absolute;
+	top:-50px;
+	right:20px;
+	background:url(/assets/searchBoxBg_nav.png) no-repeat;
+	width:254px;
+	height:35px;
+	padding-top:5px;
+	padding-left:32px;
+	-moz-box-shadow:0px 0px 60px 24px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow:0px 0px 60px 24px rgba(0, 0, 0, 0.5);
+	box-shadow:0px 0px 60px 24px rgba(0, 0, 0, 0.5);
+
+	input { 
+		float:left;
+		width:200px;
+		color:#CCC;
+		font-style:italic;
+		border:none;
+		background-color:transparent;
+		outline:none;
+		padding:8px;
+		padding-left:4px;
+		padding-right:6px;
+		font-size:13px;
+
+		&:focus {
+			color:#000;
+			font-style:normal;
+			outline:none;
+		}
+	}
+
+	input[type=submit] {
+		margin-top:5px;
+		background:url(/assets/goButton_nav.png) no-repeat;
+		width:30px;	
+		margin-left:4px;
+		cursor:pointer;	
+	}
+}
+
+/* EVENTS popup */
+#events-popup { /* Many of this element's properties are set onShow in JS */
+	font-family:"Trebuchet MS", "Helvetica Neue", Helvetica, Arial, Sans-serif;
+	display:none;
+	position:absolute;
+	overflow:hidden;
+	top:35px;
+	left:5px;
+	z-index: 999;
+	background: transparent url(/assets/eventsBg_nav.png) no-repeat;
+	padding-right:32px;
+	padding-left:32px;
+	background-color: rgba(0, 0, 0, .35);
+	-moz-box-shadow:5px 5px 67px 12px rgba(0, 0, 0, 0.45);
+	-webkit-box-shadow:5px 5px 67px 12px rgba(0, 0, 0, 0.45);
+	box-shadow:5px 5px 67px 12px rgba(0, 0, 0, 0.45);
+
+	p {
+		color: #999;
+		float:left;
+		padding:0px;
+		margin:0px;
+		margin-left:8px;
+		margin-bottom:3px;
+		font-size:11px;
+		text-transform:uppercase;
+	}
+
+	a#view-all {
+		float:right;
+		margin-right:10px;
+		color:#ed1c24;
+		font-size:12px;
+		font-weight:bold;
+		text-decoration:none;
+		text-transform:uppercase;
+		margin-bottom:3px;
+	}
+
+	.date-row {
+		clear:both;
+		border: 1px solid #666;
+		border-right:none;
+		width:576px;
+		height:38px;
+		margin:0px;
+		margin-left:auto;
+		margin-right:auto;
+		padding:0px;
+
+		.month {
+			float:left;
+			width:17px;
+			height:21px;
+			font-size:11px;
+			vertical-align:middle;
+			text-align:center;
+			padding-top:17px;
+			border-right:1px solid #999;
+
+			&#march {
+				font-size:10px;
+				height:17px;
+				background:#517f9d;
+				padding-top:21px;
+			}
+
+			&#april { background:#063562; }
+		}
+
+		.month-name {
+			color:#FFF;
+			text-transform:uppercase;
+			-webkit-transform: rotate(-90deg); 
+			-moz-transform: rotate(-90deg);
+			-ms-transform: rotate(-90deg);
+			-o-transform: rotate(-90deg);
+		}
+
+		a.date {
+		    display: block;
+			float:left;
+			min-width:35px;
+			max-width:35px;
+			height:100%;
+			border-right:#999 1px solid;
+			text-decoration: none;
+
+			.weekday {
+			    display: block;
+				width:100%;
+				text-align:center;
+				font-size:12px;
+				margin:0px;
+				padding-top:3px;
+				padding-bottom:0px;
+				text-transform: uppercase;
+				margin-left: auto;
+				margin-right: auto;
+				
+				.long-day {
+					display: none;
+				}
+			}
+
+			.day-number {
+			    display: block;
+				width:100%;
+				padding-top:0px;
+				margin-top:-2px;
+				text-align:center;
+				font-weight:bold;
+				font-size:16px;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			&.current {
+				font-weight:bold;
+				background-color:#FFF211;
+				color:#063562;
+			}
+
+			&.past {
+				background-color:#DDD;
+				color:#555;
+				&:hover {
+					background-color:#BBB;
+					color:#333;
+				}
+			}
+
+			&.future {
+				background-color:#FFF;
+				color:#063562;
+
+				.weekday { color:#999; }
+
+				&:hover {
+					background-color:#FFF211;
+					color:#063562;
+
+					.weekday { color:#063562; }
+				}
+			}
+		} /* END a.date */
+	} /* END .date-row */
+
+	.category {
+		//display:block;
+		display: table;
+		float:left;
+		color:#FFF;
+		//height:25px;
+		text-align:center;
+		width: 82px;
+		margin: 5px 3px 0;
+		//padding: 8px 5px 0;
+		height: 30px;
+		padding: 0 5px;
+
+		a {
+			display: table-cell;
+			color:#FFF;
+			font-size:12px;
+			text-decoration:none;
+			text-transform:uppercase;
+			letter-spacing:1px;
+			text-align:center;
+			vertical-align:middle;
+		}
+
+		&.exhibitions {
+			//padding-top: 5px;
+			//height: 28px;
+			//line-height: 11px;
+
+			a {
+				font-size:11px;
+				line-height: 11px;
+			}
+		}
+	}
+}
